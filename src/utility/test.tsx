@@ -22,12 +22,3 @@ export const App = () => (
 
 // Consume in your app
 
-export const PostInfo = () => {
-  const appContext = React.useContext(AppCtx);
-  return (
-    <div>
-      Name: {appContext.name}, Author: {appContext.author}, Url:{" "}
-      {appContext.url}
-    </div>
-  );
-};
