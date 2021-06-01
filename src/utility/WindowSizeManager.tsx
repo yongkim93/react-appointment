@@ -2,19 +2,39 @@ import React, { useContext, createContext, useLayoutEffect } from "react";
 import useEnhancedReducer from "./useEnhancedReducer";
 import { Children } from "../models/common";
 
+// type WSP_State1 = {
+//   width: number;
+//   height: number;
+//   colWidth: number;
+//   rowHeight: number;
+//   interval: number;
+//   intervalMinutes: number;
+//   offsetLeft: number;
+//   offsetTop: number;
+// };
+
+type WSP_State2 = {
+  width: number;
+  height: number;
+  offsetTop: number;
+  offsetLeft: number;
+};
+
 type WSP_State = {
   width: number;
   height: number;
-  colWidth?: number;
-  rowHeight?: number;
-  interval?: number;
-  intervalMinutes?: number;
+  colWidth: number;
+  rowHeight: number;
+  interval: number;
+  intervalMinutes: number;
   offsetLeft: number;
   offsetTop: number;
 };
+2;
+
 type WSP_Action = {
   type: "RESIZE";
-  payload: WSP_State;
+  payload: WSP_State2;
 };
 
 const initialState = {
@@ -22,6 +42,10 @@ const initialState = {
   height: 0,
   offsetTop: 0,
   offsetLeft: 0,
+  colWidth: 0,
+  rowHeight: 0,
+  interval: 0,
+  intervalMinutes: 0,
 };
 
 const windowSizeInfo = createContext<{
@@ -71,7 +95,7 @@ const WindowSizeProvider = ({ children }: Children) => {
       },
     });
   }
-  
+
   useLayoutEffect(() => {
     dispatchOnResize();
     window.addEventListener("resize", dispatchOnResize);
