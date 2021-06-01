@@ -1,10 +1,6 @@
-import React, {
-  useContext,
-  createContext,
-  useLayoutEffect,
-  useCallback,
-} from "react";
+import React, { useContext, createContext, useLayoutEffect } from "react";
 import useEnhancedReducer from "./useEnhancedReducer";
+import { Children } from "../models/common";
 
 type WSP_State = {
   width?: number;
@@ -24,7 +20,7 @@ type WSP_Action = {
 const windowSizeInfo = createContext({});
 const { Provider } = windowSizeInfo;
 
-const WindowSizeProvider = ({ children }: { children: React.ReactNode }) => {
+const WindowSizeProvider = ({ children }: Children) => {
   const [state, dispatch, getState] = useEnhancedReducer<WSP_State, WSP_Action>(
     (state, action) => {
       const { width = 0, height = 0, offsetLeft, offsetTop } = action.payload;
@@ -64,6 +60,6 @@ const WindowSizeProvider = ({ children }: { children: React.ReactNode }) => {
   return <Provider value={{ state, dispatch, getState }}>{children}</Provider>;
 };
 
-const useWindowSize = () => useContext(windowSizeInfo);
+const useWindowSizeManager = () => useContext(windowSizeInfo);
 
-export { useWindowSize, WindowSizeProvider };
+export { useWindowSizeManager, WindowSizeProvider };

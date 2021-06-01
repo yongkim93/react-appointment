@@ -1,6 +1,6 @@
-import React, { useReducer, useRef, useCallback } from "react";
+import React, { Reducer, Dispatch, useReducer, useRef, useCallback } from "react";
 
-function useEnhancedReducer<T, U>(reducer: React.Reducer<T, U>, initState: T):[T, React.Dispatch<U>, () => T] {
+function useEnhancedReducer<T, U>(reducer: Reducer<T, U>, initState: T):[T, Dispatch<U>, () => T] {
   const lastState = useRef(initState);
   const getState = useCallback(() => lastState.current, []);
   return [
