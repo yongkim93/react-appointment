@@ -1,4 +1,4 @@
-@import 'base';
+@import "base";
 
 html,
 body,
@@ -6,4 +6,37 @@ div#root {
   @include full-page;
   margin: 0;
   padding: 0;
+}
+.border-bottom-dashed {
+  border-bottom: 1px dashed #dee2e6;
+}
+.border-top {
+  border-top: 1px solid #dee2e6;
+}
+.border-right {
+  border-right: 1px solid #dee2e6;
+}
+.border-left {
+  border-left: 1px solid #dee2e6;
+}
+.border-bottom {
+  border-bottom: 1px solid #dee2e6;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.background-color-white{
+  background-color: white;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }

@@ -1,9 +1,15 @@
-import React from 'react';
-import { render } from 'react-dom';
-import './assets/index.scss';
+import React from "react";
+import { render } from "react-dom";
+import "./assets/index.scss";
+import { Calendar } from "./containers/calendar/Calendar";
+import { WindowSizeProvider } from "./utility/WindowSizeManager";
 
-const Application: React.SFC<{}> = () => (
-  <h1>Application</h1>
-);
+const Application = () => {
+  return (
+    <WindowSizeProvider>
+      <Calendar />
+    </WindowSizeProvider>
+  );
+};
 
-render(<Application />, document.getElementById('root'));
+render(<Application />, document.getElementById("root"));
