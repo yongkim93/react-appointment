@@ -11,6 +11,7 @@ export default function Col() {
   const style: React.CSSProperties = {
     width: windowSizeState.colWidth && windowSizeState.colWidth - 1, // -1 for border px
     height: windowSizeState.height,
+    zIndex: 0, // very important, dont delete!!!
   };
 
   for (let i = 0; i < 7; i++) {
