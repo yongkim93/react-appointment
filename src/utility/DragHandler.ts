@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useLayoutEffect, useRef, useEffect } from "react";
 import { useWindowSizeManager } from "./WindowSizeManager";
 
 type MouseStartPosition = {
@@ -72,11 +72,11 @@ const useDraw = () => {
     window.addEventListener("mousemove", onMouseMove);
 
     const col = Math.round(
-      (e.pageX - e.offsetX - getWindowSizeState().offsetLeft + 1) /
+      (e.pageX - e.offsetX - getWindowSizeState().offsetLeft) /
         getWindowSizeState().colWidth
     );
     const row = Math.floor(
-      (e.pageY - getWindowSizeState().offsetTop + 1) /
+      (e.pageY - getWindowSizeState().offsetTop) /
         getWindowSizeState().rowHeight
     );
     selectedRef.current = {
@@ -101,11 +101,11 @@ const useDraw = () => {
     window.removeEventListener("mousemove", onMouseMove);
 
     const col = Math.round(
-      (e.pageX - e.offsetX - getWindowSizeState().offsetLeft + 1) /
+      (e.pageX - e.offsetX - getWindowSizeState().offsetLeft) /
         getWindowSizeState().colWidth
     );
     const row = Math.floor(
-      (e.pageY - getWindowSizeState().offsetTop + 1) /
+      (e.pageY - getWindowSizeState().offsetTop) /
         getWindowSizeState().rowHeight
     );
     selectedRef.current = {
