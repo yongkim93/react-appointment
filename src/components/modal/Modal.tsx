@@ -1,6 +1,66 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { Children } from "~/models/common";
 import { createPortal } from "react-dom";
+
+type ModalState = {
+  isActive: boolean;
+  isUpdated: boolean;
+  isSubmitted: boolean;
+};
+
+const initialModalState: ModalState = {
+  isActive: true,
+  isUpdated: false,
+  isSubmitted: false,
+};
+
+enum MSR_Action_Type {
+  "SET_IS_ACTIVE",
+  "SET_IS_UPDATED",
+  "SET_IS_SUBMITTED",
+  "RESET",
+}
+
+type MSR_Action = {
+  type: MSR_Action_Type;
+  payload: boolean;
+};
+
+const modalStateReducer = (
+  state: ModalState,
+  action: MSR_Action
+): ModalState => {
+  switch (action.type) {
+    case MSR_Action_Type.SET_IS_ACTIVE:
+      return { ...state, isActive: action.payload };
+    case MSR_Action_Type.SET_IS_UPDATED:
+      return { ...state, isUpdated: action.payload };
+    case MSR_Action_Type.SET_IS_SUBMITTED:
+      return { ...state, isSubmitted: action.payload };
+    case MSR_Action_Type.RESET:
+      return { ...initialModalState };
+    default:
+      throw new Error("No action type");
+  }
+};
+
+const useModalStateReducer = () =>
+  useReducer(modalStateReducer, initialModalState);
+
+const modalStateReducerHelpers = {
+  isActive: (bool: boolean): MSR_Action => ({
+    type: MSR_Action_Type.SET_IS_ACTIVE,
+    payload: bool,
+  }),
+  isUpdated: (bool: boolean): MSR_Action => ({
+    type: MSR_Action_Type.SET_IS_UPDATED,
+    payload: bool,
+  }),
+  isSubmitted: (bool: boolean): MSR_Action => ({
+    type: MSR_Action_Type.SET_IS_SUBMITTED,
+    payload: bool,
+  }),
+};
 
 type Props = {
   isActive: boolean;
@@ -38,4 +98,9 @@ const Modal = (props: Props) => {
   );
 };
 
-export default Modal;
+export {
+  Modal,
+  useModalStateReducer as useModalSR,
+  modalStateReducerHelpers as modalSRH,
+  ModalState,
+};

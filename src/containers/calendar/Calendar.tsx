@@ -1,14 +1,21 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useReducer } from "react";
 import "./Calendar.scss";
-import { useWindowSizeManager } from "~/utility/WindowSizeManager";
 import { RowHeader } from "~/components/row_header/RowHeader";
 import { ColHeader } from "~/components/col_header/ColHeader";
 import { Grid } from "~/components/grid/Grid";
 import DragOnGrid from "~/components/drag_on_grid/DragOnGrid";
-import Modal from "~/components/modal/Modal";
+import { Modal, useModalSR, modalSRH } from "~/components/modal/Modal";
+import {
+  ApptForm,
+  useApptFormSR,
+  apptFormSRH,
+} from "~/components/appt_form/ApptForm";
 
 export function Calendar() {
-  const [isActive, setIsActive] = useState<boolean>(true);
+  const [modalState, setModalState] = useModalSR();
+
+  const [apptFormState, setApptFormState] = useApptFormSR();
+
   return (
     <Fragment>
       <div className="column-align">
@@ -21,11 +28,18 @@ export function Calendar() {
         </div>
       </div>
       <Modal
-        isActive={isActive}
-        onClose={() => setIsActive(false)}
-        onSubmit={() => setIsActive(false)}
+        isActive={modalState.isActive}
+        onClose={() => setModalState(modalSRH.isActive(false))}
+        onSubmit={() => {
+          setModalState(modalSRH.isActive(false));
+        }}
       >
-        <div></div>
+        <ApptForm
+          modalState={modalState}
+          apptFormState={apptFormState}
+          setApptFormState={setApptFormState}
+          apptFormSRH={apptFormSRH}
+        />
       </Modal>
       <DragOnGrid />
     </Fragment>
