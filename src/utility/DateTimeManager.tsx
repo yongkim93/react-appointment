@@ -35,8 +35,8 @@ const dateTimeInfo = createContext<{
 const { Provider } = dateTimeInfo;
 
 const DateTimeProvider = ({ children }: Children) => {
-  const [state, dispatch, getState] = useEnhancedReducer(
-    (state: typeof initialState, action: DTP_Action) => {
+  const [state, dispatch, getState] = useEnhancedReducer<typeof initialState, DTP_Action>(
+    (state, action) => {
       switch (action.type) {
         case DTP_Action_Type.SET_CURRENT_DATE:
           return { ...state, currentDate: action.payload };

@@ -5,7 +5,7 @@ export type ApptInfo = {
   message: string;
 };
 
-export type Events = {
+export type Event = {
   userId: string;
   uuid: string;
   startTime: string;
@@ -15,4 +15,4 @@ export type Events = {
 
 export type PutEvents = {
   tableName: string;
-} & Events;
+} & Event;

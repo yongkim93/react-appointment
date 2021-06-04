@@ -1,7 +1,7 @@
 import useAWS from "./useAWS";
-import { Events, PutEvents } from "~/models/dynamodb";
+import { Event, PutEvents } from "~/models/dynamodb";
 
-const ddbFormatter = (tableName: string, arr: Events[]) => {
+const ddbFormatter = (tableName: string, arr: Event[]) => {
   return {
     RequestItems: {
       tableName: arr.map((val) => {
@@ -52,7 +52,7 @@ const useHttp = () => {
     // });
   }
 
-  const putEvents = (items: Events[]) => {
+  const putEvents = (items: Event[]) => {
     // date = 'date';
     // type = 'appointment';
     // info = {start: 12, end: 21};
