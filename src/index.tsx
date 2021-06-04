@@ -3,11 +3,14 @@ import { render } from "react-dom";
 import "./assets/index.scss";
 import { Calendar } from "./containers/calendar/Calendar";
 import { WindowSizeProvider } from "./utility/WindowSizeManager";
+import { EventManagerProvider } from "./utility/EventManager";
 
 const Application = () => {
   return (
     <WindowSizeProvider>
-      <Calendar />
+      <EventManagerProvider>
+        <Calendar />
+      </EventManagerProvider>
     </WindowSizeProvider>
   );
 };
