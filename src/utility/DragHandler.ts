@@ -114,20 +114,20 @@ const useDraw = () => {
       col_end: col,
     };
 
-    setMouseEndPosition((prev) => {
-      if (prev.y_end) {
-        return {
-          x_end: e.pageX - e.offsetX + getWindowSizeState().colWidth,
-          y_end:
-            e.pageY -
-            e.offsetY +
-            getWindowSizeState().interval *
-              Math.ceil(e.offsetY / getWindowSizeState().interval),
-        };
-      } else {
-        return prev;
-      }
-    });
+    // setMouseEndPosition((prev) => {
+    //   if (prev.y_end) {
+    //     return {
+    //       x_end: e.pageX - e.offsetX + getWindowSizeState().colWidth,
+    //       y_end:
+    //         e.pageY -
+    //         e.offsetY +
+    //         getWindowSizeState().interval *
+    //           Math.ceil(e.offsetY / getWindowSizeState().interval),
+    //     };
+    //   } else {
+    //     return prev;
+    //   }
+    // });
   };
 
   useLayoutEffect(() => {

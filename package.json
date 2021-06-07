@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "run-s clean lint",
     "build": "parcel build src/index.html --no-source-maps",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./dist ./.cache",
     "lint": "run-s lint:code lint:style",
     "lint:code": "eslint --ext ts,tsx src",
     "lint:style": "stylelint src/**/*.scss",
