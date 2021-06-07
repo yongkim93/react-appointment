@@ -1,20 +1,26 @@
-import React, { Fragment, useState, useReducer } from "react";
+import React, { Fragment, useState, useReducer, useEffect } from "react";
 import "./Calendar.scss";
 import { RowHeader } from "~/components/row_header/RowHeader";
 import { ColHeader } from "~/components/col_header/ColHeader";
 import { Grid } from "~/components/grid/Grid";
-import DragOnGrid from "~/components/drag_on_grid/DragOnGrid";
+import { DragOnGrid } from "~/components/drag_on_grid/DragOnGrid";
 import { Modal, useModalSR, modalSRH } from "~/components/modal/Modal";
 import {
   ApptForm,
   useApptFormSR,
   apptFormSRH,
 } from "~/components/appt_form/ApptForm";
+import {
+  useApptDiv,
+  CreateApptOnGrid,
+} from "~/components/create_appt_on_grid/CreateApptOnGrid";
 
 export function Calendar() {
   const [modalState, setModalState] = useModalSR();
 
   const [apptFormState, setApptFormState] = useApptFormSR();
+
+  const [apptDivState, setApptDivState] = useApptDiv();
 
   return (
     <Fragment>
@@ -41,7 +47,8 @@ export function Calendar() {
           apptFormSRH={apptFormSRH}
         />
       </Modal>
-      <DragOnGrid />
+      <DragOnGrid setApptDivState={setApptDivState} />
+      <CreateApptOnGrid apptDivState={apptDivState} />
     </Fragment>
   );
 }
