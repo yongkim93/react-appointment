@@ -1,13 +1,13 @@
-import React, { useLayoutEffect, Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, ReactNode } from "react";
 import ReactDOM from "react-dom";
 
-export const useApptDiv = () => useState(<div></div>);
+export const useApptDiv = () => useState<ReactNode>(<div></div>);
 export const CreateApptDiv = (
   width: number,
   height: number,
   left: number,
   top: number
-) => {
+): ReactNode => {
   const style = {
     position: "absolute",
     width: width,
@@ -17,22 +17,18 @@ export const CreateApptDiv = (
     top: top,
   } as React.CSSProperties;
 
-  return (
-    <div
-      id="apptDiv"
-      style={style}
-    ></div>
-  );
+  return <div id="apptDiv" style={style}></div>;
 };
 
-export function CreateApptOnGrid(props: any) {
-  useEffect(() => {
-    console.log(props.apptDivState);
-  }, [props.apptDiv]);
+export type Props = {
+  apptDivState: ReactNode;
+};
+
+export function CreateApptOnGrid({ apptDivState }: Props) {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        props.apptDivState,
+        apptDivState,
         document.getElementById("root") as HTMLElement
       )}
     </Fragment>

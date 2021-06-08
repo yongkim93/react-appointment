@@ -47,7 +47,7 @@ export function Calendar() {
           apptFormSRH={apptFormSRH}
         />
       </Modal>
-      <DragOnGrid setApptDivState={setApptDivState} />
+      <DragOnGrid setApptDivState={setApptDivState} activateModal={() => setModalState(modalSRH.isActive(true))} />
       <CreateApptOnGrid apptDivState={apptDivState} />
     </Fragment>
   );

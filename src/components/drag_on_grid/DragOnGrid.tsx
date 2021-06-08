@@ -2,9 +2,14 @@ import React, { useLayoutEffect, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { useDraw } from "~/utility/DragHandler";
 import { CreateApptDiv } from "../create_appt_on_grid/CreateApptOnGrid";
+import { DispatchNode } from "~/models/common";
 
+type Props = {
+  setApptDivState: DispatchNode;
+  activateModal: () => void;
+};
 /* eslint-disable camelcase */
-export function DragOnGrid(props: any) {
+export function DragOnGrid({ setApptDivState, activateModal }: Props) {
   const {
     x_start,
     y_start,
@@ -56,10 +61,10 @@ export function DragOnGrid(props: any) {
       if (x_end - x_start > 1 && y_end - y_start > 1) {
         // props.setSelected(() => selectedRef.current);
 
-        props.setApptDivState(() =>
+        setApptDivState(() =>
           CreateApptDiv(x_end - x_start, y_end - y_start, x_start, y_start)
         );
-        // props.setActive();
+        activateModal();
       }
     }
     reset();
