@@ -1,9 +1,15 @@
 import React, { useLayoutEffect, Fragment } from "react";
 import ReactDOM from "react-dom";
 import { useDraw } from "~/utility/DragHandler";
+import { CreateApptDiv } from "../create_appt_on_grid/CreateApptOnGrid";
+import { DispatchNode } from "~/models/common";
 
+type Props = {
+  setApptDivState: DispatchNode;
+  activateModal: () => void;
+};
 /* eslint-disable camelcase */
-export default function DragOnGrid(props:any) {
+export function DragOnGrid({ setApptDivState, activateModal }: Props) {
   const {
     x_start,
     y_start,
@@ -32,22 +38,6 @@ export default function DragOnGrid(props:any) {
     top: y_start || "unset",
   };
 
-  const mystyleTemplate = (
-    width: number,
-    height: number,
-    left: number,
-    top: number
-  ): React.CSSProperties => {
-    return {
-      position: "absolute",
-      width: width,
-      height: height,
-      backgroundColor: "yellow",
-      left: left,
-      top: top,
-    };
-  };
-
   const onMouseUp = () => {
     let x_start: number = 0,
       y_start: number = 0,
@@ -68,21 +58,14 @@ export default function DragOnGrid(props:any) {
       });
 
       // must add key later
-      // if (x_end - x_start > 1 && y_end - y_start > 1) {
-      //   props.setSelected(() => selectedRef.current);
+      if (x_end - x_start > 1 && y_end - y_start > 1) {
+        // props.setSelected(() => selectedRef.current);
 
-      //   props.setDragDiv(() => (
-      //     <div
-      //       style={mystyleTemplate(
-      //         x_end - x_start,
-      //         y_end - y_start,
-      //         x_start,
-      //         y_start
-      //       )}
-      //     ></div>
-      //   ));
-      //   props.setActive();
-      // }
+        setApptDivState(() =>
+          CreateApptDiv(x_end - x_start, y_end - y_start, x_start, y_start)
+        );
+        activateModal();
+      }
     }
     reset();
   };
@@ -108,10 +91,6 @@ export default function DragOnGrid(props:any) {
         <div style={mystyle}></div>,
         document.getElementById("root") as HTMLElement
       )}
-      {/* {ReactDOM.createPortal(
-        props.dragDiv,
-        document.getElementById("root") as HTMLElement
-      )} */}
     </Fragment>
   );
 }
